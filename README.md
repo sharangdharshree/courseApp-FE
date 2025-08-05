@@ -10,3 +10,11 @@
                 etc states
 
     a return value in useEffect to perform cleanup actions or any code during unmount time
+
+
+    start with UI--
+
+    tailwindcss, shadcn has ready made components,
+
+login / register page ui ready, link with react router and set the navigation for home, auth, all courses
+then connect auth functionality with redux and do conditional changes in header and body after auth

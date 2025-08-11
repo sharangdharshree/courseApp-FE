@@ -16,5 +16,10 @@
 
     tailwindcss, shadcn has ready made components,
 
-login / register page ui ready, link with react router and set the navigation for home, auth, all courses
-then connect auth functionality with redux and do conditional changes in header and body after auth
+login / register page ui ready, link with react router and set the navigation for home, auth, all courses -- DONE
+
+then connect auth functionality with redux and do conditional changes in header and body after auth --- DONE
+
+create auth layout wrap elements in router and render on auth state ---
+
+added toast, using react-hot-toast

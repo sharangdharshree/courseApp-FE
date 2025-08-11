@@ -1,15 +1,16 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function Register() {
   return (
-    <div className="flex h-screen justify-center items-center">
+    <div className="flex h-screen justify-center items-center ">
       <div className="h-121 w-131 bg-gradient-to-l from-blue-500 to-cyan-500 rounded-md shadow-2xl flex justify-center items-center">
         <div className="h-120 w-130 bg-slate-950 rounded-md text-gray-50 flex justify-center items-center flex-col">
           <h1 className="text-4xl font-medium mb-4">Register</h1>
           <form action="" className="flex flex-col items-center">
             <div className="flex flex-row justify-between">
               <div className="flex flex-col mr-1">
-                <label htmlFor="first" className="mb-2">
+                <label htmlFor="firstName" className="mb-2">
                   First Name
                 </label>
                 <input
@@ -64,9 +65,9 @@ function Register() {
             </button>
             <p className="text-center mt-4 w-full">
               Already Registered?{" "}
-              <a href="" className="font-medium text-cyan-300">
+              <Link to={"/auth"} className="font-medium text-cyan-300">
                 Login
-              </a>
+              </Link>
             </p>
           </form>
         </div>

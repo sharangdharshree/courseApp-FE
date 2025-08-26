@@ -11,7 +11,13 @@ import {
   Login,
   Register,
   Courses,
+  Course,
 } from "./components/index.js";
+import AuthLayout from "./layouts/AuthLayout.jsx";
+import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+
+const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
   {
@@ -28,7 +34,11 @@ const router = createBrowserRouter([
         children: [
           {
             path: "/auth",
-            element: <Login />,
+            element: (
+              <AuthLayout authRequired={false}>
+                <Login />
+              </AuthLayout>
+            ),
           },
           {
             path: "/auth/register",
@@ -40,6 +50,10 @@ const router = createBrowserRouter([
         path: "/courses",
         element: <Courses />,
       },
+      {
+        path: "/course/:id",
+        element: <Course />,
+      },
     ],
   },
 ]);
@@ -47,7 +61,12 @@ const router = createBrowserRouter([
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <Provider store={store}>
-      <RouterProvider router={router} />
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+        {import.meta.env.VITE_NODE_ENV === "development" ? (
+          <ReactQueryDevtools initialIsOpen={false} />
+        ) : null}
+      </QueryClientProvider>
     </Provider>
   </StrictMode>
 );

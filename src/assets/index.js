@@ -6,5 +6,18 @@ import linkedin from "./linkedin.png";
 import twitter from "./twitter.png";
 import verify from "./verify.png";
 import user from "./user.png";
+import banner from "./banner.png";
+import textHome from "./textHome.jpg";
 
-export { logo, facebook, github, instagram, linkedin, twitter, verify, user };
+export {
+  logo,
+  facebook,
+  github,
+  instagram,
+  linkedin,
+  twitter,
+  verify,
+  user,
+  banner,
+  textHome,
+};

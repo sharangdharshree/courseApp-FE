@@ -39,19 +39,19 @@ function Header() {
       <div>
         <nav className="mx-2">
           <ul className="flex flex-row justify-between items-center">
-            <li className="p-2 border-b-1 border-b-slate-950 hover:border-b-1 hover:border-b-cyan-600">
+            <li className="p-2 border-b-1 border-b-transparent hover:border-b-1 hover:border-b-cyan-600">
               <NavLink to={"/"}>Home</NavLink>
             </li>
-            <li className="p-2 border-b-1 border-b-slate-950 hover:border-b-1 hover:border-b-cyan-600">
+            <li className="p-2 border-b-1 border-b-transparent hover:border-b-1 hover:border-b-cyan-600">
               <NavLink to={"/courses"}>Courses</NavLink>
             </li>
             <li className="p-2 group relative hover:cursor-pointer ">
               About Us
               <div className="hidden group-hover:block group-hover:flex group-hover:flex-col group-hover:items-center group-hover:bg-gray-800 rounded-md w-27 p-2 absolute space-y-2">
-                <Link to={"/"} className="hover:bg-gray-700 rounded p-1">
+                <Link to={"/"} className="hover:bg-gray-700 rounded p-1 w-full">
                   Our Story
                 </Link>
-                <Link to={"/"} className="hover:bg-gray-700 rounded p-1">
+                <Link to={"/"} className="hover:bg-gray-700 rounded p-1 w-full">
                   Contact Us
                 </Link>
               </div>
@@ -68,14 +68,21 @@ function Header() {
                 alt=""
                 className="h-10 p-2 rounded-md shadow-xl"
               />
-              <div className="hidden group-hover:block group-hover:flex group-hover:flex-col group-hover:items-center group-hover:bg-gray-800 rounded-md w-24 p-2 absolute right-2 space-y-3 ">
-                <Link className="hover:bg-gray-700 rounded p-2">Account</Link>
-                <Link className="hover:bg-gray-700 rounded p-2">Helpdesk</Link>
+              <div className="hidden group-hover:block group-hover:flex group-hover:flex-col group-hover:items-center group-hover:bg-gray-800 rounded-md w-30 p-2 absolute right-2 space-y-3 ">
+                <Link className="hover:bg-gray-700 rounded p-2 w-full">
+                  My Account
+                </Link>
+                <Link className="hover:bg-gray-700 rounded p-2 w-full">
+                  My Courses
+                </Link>
+                <Link className="hover:bg-gray-700 rounded p-2 w-full">
+                  Helpdesk
+                </Link>
                 <button
                   onClick={() => {
                     logout();
                   }}
-                  className="hover:bg-gray-700 rounded p-2"
+                  className="hover:bg-gray-700 rounded-xs p-2 w-full border-t-1 border-t-cyan-600/50 hover:border-t-0"
                 >
                   Logout
                 </button>

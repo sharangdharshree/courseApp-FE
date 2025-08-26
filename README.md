@@ -19,7 +19,29 @@
 login / register page ui ready, link with react router and set the navigation for home, auth, all courses -- DONE
 
 then connect auth functionality with redux and do conditional changes in header and body after auth --- DONE
-
-create auth layout wrap elements in router and render on auth state ---
-
 added toast, using react-hot-toast
+
+create auth layout wrap elements in router and render on auth state --- DONE
+
+to do next:--
+
+    cards done, BUT fix responsiveness
+
+    populate course db with actual videos, notes, pdfs, thumbnails
+    create course cards for all-courses page, all cards should show properly in all courses page
+    create course page, when you click on course then course detail page is opened, that page
+
+    razorpay integration, dummy payment success
+
+    then move to pages after login
+    1st course page, when you are enrolled then course page or when your are the creator/admin
+
+    user dashboard
+
+    admin dashboard
+    admin course create/edit/etc pages
+
+---FOR BACKEND !!!---
+
+    - update course schema and controllers for:
+    - coupon codes, mode: LIVE/Recorded, Language of course

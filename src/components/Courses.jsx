@@ -1,8 +1,4 @@
-import React, { useEffect } from "react";
-import {
-  courseFetchService,
-  allCoursesFetchService,
-} from "../services/public.service.js";
+import { allCoursesFetchService } from "../services/public.service.js";
 import { useQuery } from "@tanstack/react-query";
 import { Card, Spinner } from "./index.js";
 

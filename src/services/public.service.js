@@ -4,7 +4,7 @@ import { getCourse, getAllCourses } from "../api/public/public.api.js";
 const courseFetchService = async (courseId) => {
   try {
     const response = await getCourse(courseId);
-    //console.log(response);
+    //console.log(response.data.data);
     return response.data.data;
   } catch (error) {
     throw apiErrorHandler(error);

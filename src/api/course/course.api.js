@@ -1,13 +1,13 @@
 import apiErrorHandler from "../../utils/apiErrorHandler.js";
 import axios from "../axiosInstance.js";
 
-const getPurchasedCourses = async () => {
+const getCourseContent = async (courseId) => {
   try {
-    return await axios.get("/user/purchased-courses");
+    return await axios.get(`/course/${courseId}/learn`);
   } catch (error) {
     throw apiErrorHandler(error);
   }
 };
 
-export { getPurchasedCourses };
+export { getCourseContent };
 

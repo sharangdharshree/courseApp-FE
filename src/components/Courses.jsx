@@ -16,7 +16,9 @@ function Courses() {
   return (
     <div className="flex justify-evenly flex-wrap bg-slate-950 my-20 px-10">
       {isLoading ? (
-        <Spinner />
+        <div className="h-screen flex justify-center items-center">
+          <Spinner />
+        </div>
       ) : (
         data.map((course) => (
           <Card
@@ -24,7 +26,7 @@ function Courses() {
             id={course._id}
             banner={course.thumbnail.url}
             title={course.title}
-            sellingPrice={5999}
+            sellingPrice={course.basePrice.amount}
             mrp={course.basePrice.amount}
             discount={59}
           />

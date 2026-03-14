@@ -1,19 +1,20 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-export default function Protected({ children, authRequired = true }) {
+export default function AuthLayout({ children, authRequired = true }) {
   const navigate = useNavigate();
-
-  const authStatus = useSelector((state) => state.auth.isAuthenticated);
+  const { isAuthenticated, authChecked } = useSelector((state) => state.auth);
 
   useEffect(() => {
-    if (authRequired && !authStatus) {
-      navigate("/login");
-    } else if (!authRequired && authStatus) {
+    if (!authChecked) return; // wait for boot check to complete before redirecting
+
+    if (authRequired && !isAuthenticated) {
+      navigate("/auth");
+    } else if (!authRequired && isAuthenticated) {
       navigate("/");
     }
-  }, [authStatus, navigate, authRequired]);
+  }, [isAuthenticated, authChecked, navigate, authRequired]);
 
   return <>{children}</>;
 }

@@ -12,6 +12,9 @@ import {
   Register,
   Courses,
   Course,
+  CourseLearn,
+  MyCourses,
+  MyAccount,
 } from "./components/index.js";
 import AuthLayout from "./layouts/AuthLayout.jsx";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
@@ -53,6 +56,26 @@ const router = createBrowserRouter([
       {
         path: "/course/:id",
         element: <Course />,
+      },
+      {
+        path: "/course/:id/learn",
+        element: <CourseLearn />,
+      },
+      {
+        path: "/my-courses",
+        element: (
+          <AuthLayout authRequired={true}>
+            <MyCourses />
+          </AuthLayout>
+        ),
+      },
+      {
+        path: "/my-account",
+        element: (
+          <AuthLayout authRequired={true}>
+            <MyAccount />
+          </AuthLayout>
+        ),
       },
     ],
   },

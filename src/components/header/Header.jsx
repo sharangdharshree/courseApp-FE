@@ -69,10 +69,10 @@ function Header() {
                 className="h-10 p-2 rounded-md shadow-xl"
               />
               <div className="hidden group-hover:block group-hover:flex group-hover:flex-col group-hover:items-center group-hover:bg-gray-800 rounded-md w-30 p-2 absolute right-2 space-y-3 ">
-                <Link className="hover:bg-gray-700 rounded p-2 w-full">
+                <Link to="/my-account" className="hover:bg-gray-700 rounded p-2 w-full">
                   My Account
                 </Link>
-                <Link className="hover:bg-gray-700 rounded p-2 w-full">
+                <Link to="/my-courses" className="hover:bg-gray-700 rounded p-2 w-full">
                   My Courses
                 </Link>
                 <Link className="hover:bg-gray-700 rounded p-2 w-full">

@@ -4,12 +4,6 @@ import {
   userSignup,
   refreshUserAccessToken,
 } from "../api/user/auth.api.js";
-import {
-  adminLogin,
-  adminLogout,
-  adminSignup,
-  refreshAdminAccessToken,
-} from "../api/admin/auth.api.js";
 
 import apiErrorHandler from "../utils/apiErrorHandler.js";
 
@@ -30,28 +24,29 @@ const userLogoutService = async () => {
   } catch (error) {
     throw apiErrorHandler(error);
   }
+};
 
-  const userSignupService = async (formdata) => {};
+const userSignupService = async (formdata) => {
+  try {
+    const response = await userSignup(formdata);
+    return response.data;
+  } catch (error) {
+    throw apiErrorHandler(error);
+  }
+};
 
-  const refreshUserAccessTokenService = async () => {};
-
-  // admin auth services
-  const adminLoginService = async (credentials) => {};
-
-  const adminLogoutService = async () => {};
-
-  const refreshAdminAccessTokenService = async () => {};
-
-  const adminSignupService = async (formdata) => {};
+const refreshUserAccessTokenService = async () => {
+  try {
+    const response = await refreshUserAccessToken();
+    return response.data;
+  } catch (error) {
+    throw apiErrorHandler(error);
+  }
 };
 
 export {
   userLoginService,
   userLogoutService,
-  // userSignupService,
-  // refreshUserAccessTokenService,
-  // adminLoginService,
-  // adminLogoutService,
-  // refreshAdminAccessTokenService,
-  // adminSignupService,
+  userSignupService,
+  refreshUserAccessTokenService,
 };

@@ -9,6 +9,10 @@ import Login from "./Login.jsx";
 import Register from "./Register.jsx";
 import AuthOutlet from "./AuthOutlet.jsx";
 import Spinner from "./loader/Spinner.jsx";
+import CourseDescription from "./CourseDescription.jsx";
+import CourseLearn from "./CourseLearn.jsx";
+import MyCourses from "./MyCourses.jsx";
+import MyAccount from "./MyAccount.jsx";
 
 export {
   Footer,
@@ -22,4 +26,8 @@ export {
   Register,
   AuthOutlet,
   Spinner,
+  CourseDescription,
+  CourseLearn,
+  MyCourses,
+  MyAccount,
 };

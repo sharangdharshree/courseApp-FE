@@ -1,15 +1,12 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
-import fs from "fs";
+
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
   server: {
-    https: {
-      key: fs.readFileSync("C:\\Users\\shara\\ssl\\key.pem"),
-      cert: fs.readFileSync("C:\\Users\\shara\\ssl\\cert.pem"),
-    },
+    https: false,
     port: 5173,
   },
 });

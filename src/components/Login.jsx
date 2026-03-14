@@ -4,7 +4,7 @@ import { login as authLogin } from "../redux/features/authSlice.js";
 import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 import { userLoginService } from "../services/auth.service.js";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 
 function Login() {
   const navigate = useNavigate();
@@ -26,8 +26,6 @@ function Login() {
         dispatch(authLogin(response.data.user));
         toast.success("Login successful", { position: "top-right" });
         navigate("/");
-      } else {
-        console.log(re);
       }
     } catch (err) {
       // If error is field-specific
@@ -97,7 +95,6 @@ function Login() {
             >
               {loading ? "Logging in..." : " Login"}
             </button>
-            <Toaster />
             <p className="text-center mt-8 w-full">
               Not Registered?{" "}
               <Link to={"/auth/register"} className="font-medium text-cyan-300">

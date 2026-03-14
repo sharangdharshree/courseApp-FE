@@ -19,7 +19,7 @@ const userLogout = async () => {
 
 const userSignup = async (formdata) => {
   try {
-    return await axios.post("/user/signup", formdata);
+    return await axios.post("/user/register", formdata);
   } catch (error) {
     throw apiErrorHandler(error);
   }

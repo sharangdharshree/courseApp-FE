@@ -1,56 +1,148 @@
-    set proxy in vite.config
+# CourseWallah — Frontend
 
-    async await in useEffect(): iife, and use of ; at the beginning of the iife
-    edge cases, try catch
-    in search:  axios abort request to prevent race condition
-                debounce to prevent multiple api request on every click or when want to delay some action
-    react query: --
-                error
-                loading
-                etc states
+A full-featured online course marketplace built with React. Users can browse courses, enroll via Razorpay payments with coupon support, and access purchased course content.
 
-    a return value in useEffect to perform cleanup actions or any code during unmount time
+> **Backend repo:** [courseWallahBE](https://github.com/sharangdharshree/courseApp-BE) — Node.js + Express + MongoDB
 
+---
 
-    start with UI--
+## Features
 
-    tailwindcss, shadcn has ready made components,
+- **Authentication** — Register, login, logout with JWT stored in httpOnly cookies. Session persists across page refreshes via refresh token. Access tokens silently refresh on expiry — no manual re-login needed.
+- **Course Catalog** — Browse all published courses with thumbnails, category, pricing, and syllabus preview.
+- **Enrollment & Payments** — Razorpay checkout with coupon code support (fixed / percentage discounts). Handles free courses (₹0) too.
+- **My Courses** — Dashboard of all purchased courses with direct access to course content.
+- **Course Learning** — Section-based video player for enrolled courses.
+- **My Account** — View account details.
 
-login / register page ui ready, link with react router and set the navigation for home, auth, all courses -- DONE
+---
 
-then connect auth functionality with redux and do conditional changes in header and body after auth --- DONE
-added toast, using react-hot-toast
+## Tech Stack
 
-create auth layout wrap elements in router and render on auth state --- DONE
+| Layer                  | Library / Tool                                             |
+| ---------------------- | ---------------------------------------------------------- |
+| Framework              | React 19 + Vite 7                                          |
+| Styling                | Tailwind CSS 4                                             |
+| State management       | Redux Toolkit                                              |
+| Server state / caching | TanStack React Query v5                                    |
+| Routing                | React Router v7                                            |
+| HTTP client            | Axios (with response interceptor for silent token refresh) |
+| Forms                  | React Hook Form                                            |
+| Notifications          | React Hot Toast                                            |
+| Payments               | Razorpay Web SDK                                           |
+| Rich text              | TinyMCE + html-react-parser + DOMPurify                    |
 
-to do next:--
+---
 
-    cards done, BUT fix responsiveness
-    course page done, add responsiveness
+## Getting Started
 
-    populate course db with actual videos, notes, pdfs, thumbnails --- DONE
-    create course cards for all-courses page, all cards should show properly in all courses page --- PARTIAL
+### Prerequisites
 
-    --- create course page, when you click on course then course detail page is opened, that page --- PARTIAL 90% (yet to config responsiveness)!!!
+- Node.js 18+
+- Backend running locally (see [courseWallahBE](https://github.com/your-username/courseWallahBE))
 
-    razorpay integration, dummy payment success --- working
-    make sure these routes are only access to a verified "user" only, i.e after auth that too only limited to "user"
-        - setup up checkout service + api layer, provide :
-        - /apply-coupon
-        - /initiate-pay
-        initiate razorpay checkout UI
-        - /verify-pay or any better endpoint for payment success/fail data sending
-        - after payment confirmation show success or failure logic at course page
+### Installation
 
-    then move to pages after login
-    1st course page, when you are enrolled then course page or when your are the creator/admin
+```bash
+git clone <repo-url>
+cd courseWallahFE
+npm install
+```
 
-    user dashboard
+### Environment Variables
 
-    admin dashboard
-    admin course create/edit/etc pages
+Create a `.env` file in the project root:
 
----FOR BACKEND !!!---
+```env
+VITE_API_URL=http://localhost:8080/api/v1
+VITE_RAZORPAY_KEY_ID=your_razorpay_test_key
+VITE_NODE_ENV=development
+```
 
-    - update course schema and controllers for:
-    - coupon codes, mode: LIVE/Recorded, Language of course
+| Variable               | Description                            |
+| ---------------------- | -------------------------------------- |
+| `VITE_API_URL`         | Base URL of the backend API            |
+| `VITE_RAZORPAY_KEY_ID` | Razorpay key ID (use test key for dev) |
+| `VITE_NODE_ENV`        | `development` or `production`          |
+
+### Run
+
+```bash
+npm run dev       # start dev server → http://localhost:5173
+npm run build     # production build → dist/
+npm run preview   # preview production build locally
+npm run lint      # run ESLint
+```
+
+---
+
+## Project Structure
+
+```
+src/
+├── api/                   # Raw axios calls grouped by domain
+│   ├── axiosInstance.js   # Axios instance + 401 interceptor (silent token refresh)
+│   ├── user/
+│   ├── admin/
+│   ├── public.api.js
+│   └── checkout.api.js
+├── components/            # All UI components and page components
+│   ├── header/
+│   ├── footer/
+│   ├── home/
+│   ├── loader/
+│   ├── Course.jsx         # Course detail + enrollment flow
+│   ├── CourseLearn.jsx    # Enrolled course content viewer
+│   ├── Courses.jsx        # Course catalog
+│   ├── Login.jsx
+│   ├── Register.jsx
+│   ├── MyCourses.jsx      # User's purchased courses
+│   └── MyAccount.jsx      # User profile (read-only)
+├── layouts/
+│   └── AuthLayout.jsx     # Route guard — redirects based on auth state
+├── redux/
+│   ├── features/
+│   │   ├── authSlice.js   # isAuthenticated, userData, authChecked
+│   │   └── uiSlice.js
+│   └── store/
+├── services/              # Service layer wrapping API calls
+├── utils/
+│   ├── config.js          # Env var access
+│   └── apiErrorHandler.js
+└── main.jsx               # Router + providers setup
+```
+
+---
+
+## Auth Flow
+
+```
+App mount
+  → POST /user/refresh-token  (boot call — session restoration)
+    → success: dispatch login(user) → show app
+    → fail:    dispatch logout()    → show app (unauthenticated)
+
+Mid-session (access token expires after 15 min)
+  → Any API call → 401
+  → Axios interceptor fires
+    → POST /user/refresh-token silently
+      → success: retry original request (user unaware)
+      → fail:    dispatch logout() → redirect to /auth
+```
+
+---
+
+## Todo
+
+- [ ] Admin login and authentication
+- [ ] Course creation and management (admin dashboard)
+
+---
+
+## Deployment
+
+Deployed on **Vercel**. Pushes to `main` auto-deploy to production. Every PR gets a preview deployment URL automatically.
+
+Set the same environment variables in Vercel → Project Settings → Environment Variables.
+
+---
